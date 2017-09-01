@@ -1,5 +1,5 @@
 
-TERMINAL_CHARS = 79
+TERMINAL_CHARS = 72
 
 def section(sect_name, width=TERMINAL_CHARS):
     
@@ -38,12 +38,12 @@ def blockprint(content, width=TERMINAL_CHARS):
     """
 
     lines = content.split('\n')
-    print('_'*length)
+    print('_'*width)
     print('')
     for line in lines:
         p = line.strip()
         print("| " + p)
-    print('_'*length)
+    print('_'*width)
 
 def errprint(msg):
     
