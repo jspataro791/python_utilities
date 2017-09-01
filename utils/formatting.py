@@ -11,7 +11,6 @@ TERMINAL_CHARS = 72
 
 ## Functions
 
-
 def section(sect_name, width=TERMINAL_CHARS):
     
     """ Prints a section header.
