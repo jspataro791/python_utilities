@@ -14,7 +14,7 @@ class PersistentDotDict(DotDict):
 		will be immediately written out to disk as a YAML file.
 		
 		>>> a = PDD()
-		>>> a.setSavePath('./preferences.yml')
+		>>> a.set_persistence_path('./preferences.yml')
 		>>> a.modify.x = 25 # this will save
 		>>> a.modify.y = 54 # this will also save
 		>>> a.z = 2 # this will not save
