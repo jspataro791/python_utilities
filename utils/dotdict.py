@@ -20,8 +20,9 @@ class PersistentDotDict(DotDict):
 		>>> a.z = 2 # this will not save
 	'''
 	save_path = ''
+	load_path = ''
 	save_mode = 'yaml'
-	
+
 	def set_save_mode(self, savemode):
 		sm = savemode.lower()
 		assert savemode in ['yaml', 'json', 'yml']
@@ -29,6 +30,13 @@ class PersistentDotDict(DotDict):
 	
 	def set_save_path(self, path):
 		self.save_path = path
+		
+	def set_load_path(self, path):
+		self.load_path = path
+		
+	def set_persistence_path(self, path):
+		self.set_save_path(path)
+		self.set_load_path(path)
 	
 	def save(self):
 		spath = os.path.abspath(self.save_path)
@@ -38,6 +46,15 @@ class PersistentDotDict(DotDict):
 			else:
 				sfile.write(self.toJSON())
 				
+	def load(self):
+		ipath = os.path.abspath(self.load_path)
+		with open(ipath, 'r') as ofile:
+			inf = ofile.read()
+		if self.save_mode in ['yaml', 'yml']:
+			self.fromYAML(inf)
+		else:
+			self.fromJSON(inf)
+
 	def commit(self):
 		self.save()
 			
@@ -60,7 +77,7 @@ dd  = DotDict
 # MAIN/TESTING
 if __name__ == "__main__":
 	a = PDD()
-	a.set_save_path('./tests.yml')
+	a.set_persistence_path('./tests.yml')
 	a.set_save_mode('yml')
 	a.modify.x = 25
 	a.modify.y = 32
