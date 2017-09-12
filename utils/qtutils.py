@@ -6,28 +6,28 @@
 #======================================================
 
 ## Imports
-
-from PySide.QtGui import *
+ 
+from PyQt5 import Qt
 import formatting as fmt
 
 ## Classes
 
-class ListSelectionDialog(QDialog):
+class ListSelectionDialog(Qt.QDialog):
 
     def __init__(self, items=None, message='',
                  select_multiple=False, parent=None):
 
         # Init Subclass
-        QDialog.__init__(self, parent)
+        Qt.QDialog.__init__(self, parent)
 
         # Init Widgets
-        self.msg = QLabel(message)
-        self.list_widget = QListWidget()
-        self.ok_button = QPushButton('OK')
+        self.msg = Qt.QLabel(message)
+        self.list_widget = Qt.QListWidget()
+        self.ok_button = Qt.QPushButton('OK')
 
-        self.setLayout(QVBoxLayout())
+        self.setLayout(Qt.QVBoxLayout())
         
-        button_layout = QHBoxLayout()
+        button_layout = Qt.QHBoxLayout()
         button_layout.addWidget(self.ok_button)
 
         self.layout().addWidget(self.msg)
@@ -43,7 +43,7 @@ class ListSelectionDialog(QDialog):
 
         # Other setup
         if select_multiple:
-            self.list_widget.setSelectionMode(QAbstractItemView.MultiSelection)
+            self.list_widget.setSelectionMode(Qt.QAbstractItemView.MultiSelection)
 
     def addItem(self, item_name):
         self.list_widget.addItem(item_name)
@@ -77,7 +77,7 @@ class AppLaunch(object):
     def __enter__(self):
 
         try:
-            app = QApplication(self.argv)
+            app = Qt.QApplication(self.argv)
             app.setStyle('cleanlooks')
             self.app = app
         except RuntimeError:
